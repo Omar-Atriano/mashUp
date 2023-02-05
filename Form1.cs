@@ -16,5 +16,10 @@ namespace mashUp
         {
             InitializeComponent();
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
     }
 }
