@@ -32,18 +32,18 @@
             this.PCT_CANVAS = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.PANEL_LEFT = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.PLAY = new System.Windows.Forms.Button();
             this.RECORD = new System.Windows.Forms.Button();
             this.ADD = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.framesLabel = new System.Windows.Forms.Label();
             this.panelDown = new System.Windows.Forms.Panel();
             this.sliderX = new System.Windows.Forms.PictureBox();
             this.panelR = new System.Windows.Forms.Panel();
             this.sliderY = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.framesLabel = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.PANEL_LEFT.SuspendLayout();
@@ -88,6 +88,16 @@
             this.PANEL_LEFT.Name = "PANEL_LEFT";
             this.PANEL_LEFT.Size = new System.Drawing.Size(200, 771);
             this.PANEL_LEFT.TabIndex = 9;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(25, 499);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(138, 20);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Animate all figures";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // PLAY
             // 
@@ -138,6 +148,15 @@
             this.panel1.Size = new System.Drawing.Size(1533, 54);
             this.panel1.TabIndex = 10;
             // 
+            // framesLabel
+            // 
+            this.framesLabel.AutoSize = true;
+            this.framesLabel.Location = new System.Drawing.Point(630, 41);
+            this.framesLabel.Name = "framesLabel";
+            this.framesLabel.Size = new System.Drawing.Size(56, 16);
+            this.framesLabel.TabIndex = 9;
+            this.framesLabel.Text = "Frames:";
+            // 
             // panelDown
             // 
             this.panelDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -184,25 +203,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // framesLabel
-            // 
-            this.framesLabel.AutoSize = true;
-            this.framesLabel.Location = new System.Drawing.Point(630, 41);
-            this.framesLabel.Name = "framesLabel";
-            this.framesLabel.Size = new System.Drawing.Size(56, 16);
-            this.framesLabel.TabIndex = 9;
-            this.framesLabel.Text = "Frames:";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(25, 499);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(138, 20);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Animate all figures";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
