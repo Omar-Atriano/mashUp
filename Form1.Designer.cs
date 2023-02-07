@@ -32,14 +32,18 @@
             this.PCT_CANVAS = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.PANEL_LEFT = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.PLAY = new System.Windows.Forms.Button();
+            this.RECORD = new System.Windows.Forms.Button();
             this.ADD = new System.Windows.Forms.Button();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelDown = new System.Windows.Forms.Panel();
             this.sliderX = new System.Windows.Forms.PictureBox();
             this.panelR = new System.Windows.Forms.Panel();
             this.sliderY = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.framesLabel = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.PANEL_LEFT.SuspendLayout();
@@ -75,6 +79,9 @@
             // 
             // PANEL_LEFT
             // 
+            this.PANEL_LEFT.Controls.Add(this.checkBox1);
+            this.PANEL_LEFT.Controls.Add(this.PLAY);
+            this.PANEL_LEFT.Controls.Add(this.RECORD);
             this.PANEL_LEFT.Controls.Add(this.ADD);
             this.PANEL_LEFT.Controls.Add(this.treeView1);
             this.PANEL_LEFT.Location = new System.Drawing.Point(0, 64);
@@ -82,13 +89,35 @@
             this.PANEL_LEFT.Size = new System.Drawing.Size(200, 771);
             this.PANEL_LEFT.TabIndex = 9;
             // 
-            // panel1
+            // PLAY
             // 
-            this.panel1.Controls.Add(this.trackBar1);
-            this.panel1.Location = new System.Drawing.Point(211, 64);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1533, 54);
-            this.panel1.TabIndex = 10;
+            this.PLAY.Location = new System.Drawing.Point(12, 656);
+            this.PLAY.Name = "PLAY";
+            this.PLAY.Size = new System.Drawing.Size(164, 32);
+            this.PLAY.TabIndex = 3;
+            this.PLAY.Text = "Play Animation";
+            this.PLAY.UseVisualStyleBackColor = true;
+            this.PLAY.Click += new System.EventHandler(this.PLAY_Click);
+            // 
+            // RECORD
+            // 
+            this.RECORD.Location = new System.Drawing.Point(12, 604);
+            this.RECORD.Name = "RECORD";
+            this.RECORD.Size = new System.Drawing.Size(164, 35);
+            this.RECORD.TabIndex = 2;
+            this.RECORD.Text = "Record Point";
+            this.RECORD.UseVisualStyleBackColor = true;
+            this.RECORD.Click += new System.EventHandler(this.RECORD_Click);
+            // 
+            // ADD
+            // 
+            this.ADD.Location = new System.Drawing.Point(12, 554);
+            this.ADD.Name = "ADD";
+            this.ADD.Size = new System.Drawing.Size(164, 33);
+            this.ADD.TabIndex = 1;
+            this.ADD.Text = "Create Figure";
+            this.ADD.UseVisualStyleBackColor = true;
+            this.ADD.Click += new System.EventHandler(this.ADD_Click);
             // 
             // treeView1
             // 
@@ -100,15 +129,14 @@
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeView1_KeyPress);
             // 
-            // ADD
+            // panel1
             // 
-            this.ADD.Location = new System.Drawing.Point(16, 506);
-            this.ADD.Name = "ADD";
-            this.ADD.Size = new System.Drawing.Size(164, 33);
-            this.ADD.TabIndex = 1;
-            this.ADD.Text = "button1";
-            this.ADD.UseVisualStyleBackColor = true;
-            this.ADD.Click += new System.EventHandler(this.ADD_Click);
+            this.panel1.Controls.Add(this.framesLabel);
+            this.panel1.Controls.Add(this.trackBar1);
+            this.panel1.Location = new System.Drawing.Point(211, 64);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1533, 54);
+            this.panel1.TabIndex = 10;
             // 
             // panelDown
             // 
@@ -117,7 +145,7 @@
             this.panelDown.Controls.Add(this.sliderX);
             this.panelDown.Location = new System.Drawing.Point(211, 783);
             this.panelDown.Name = "panelDown";
-            this.panelDown.Size = new System.Drawing.Size(1533, 52);
+            this.panelDown.Size = new System.Drawing.Size(1505, 52);
             this.panelDown.TabIndex = 11;
             // 
             // sliderX
@@ -157,12 +185,31 @@
             this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // framesLabel
+            // 
+            this.framesLabel.AutoSize = true;
+            this.framesLabel.Location = new System.Drawing.Point(630, 41);
+            this.framesLabel.Name = "framesLabel";
+            this.framesLabel.Size = new System.Drawing.Size(56, 16);
+            this.framesLabel.TabIndex = 9;
+            this.framesLabel.Text = "Frames:";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(25, 499);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(138, 20);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Animate all figures";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1952, 871);
+            this.ClientSize = new System.Drawing.Size(1924, 871);
             this.Controls.Add(this.panelR);
             this.Controls.Add(this.panelDown);
             this.Controls.Add(this.panel1);
@@ -170,11 +217,12 @@
             this.Controls.Add(this.PCT_CANVAS);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MashUp";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.PANEL_LEFT.ResumeLayout(false);
+            this.PANEL_LEFT.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelDown.ResumeLayout(false);
@@ -198,6 +246,10 @@
         private System.Windows.Forms.Panel panelR;
         private System.Windows.Forms.PictureBox sliderY;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button PLAY;
+        private System.Windows.Forms.Button RECORD;
+        private System.Windows.Forms.Label framesLabel;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

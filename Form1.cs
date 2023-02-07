@@ -24,8 +24,93 @@ namespace mashUp
         Scene scene;
         bool isMouseDown = false;
 
+
+        private bool play = false;
+
+
+
         const int WM_KEYUP = 0x0101;
 
+        public Form1()
+        {
+            InitializeComponent();
+            Init();
+            IsMouseDownX = false;
+        }
+
+        private void Init()
+        {
+            bmpX = new Bitmap(sliderX.Width, sliderX.Height);
+            bmpY = new Bitmap(sliderY.Width, sliderY.Height);
+
+            gX = Graphics.FromImage(bmpX);
+            gY = Graphics.FromImage(bmpY);
+
+            sliderX.Image = bmpX;
+            sliderY.Image = bmpY;
+
+            gX.DrawLine(Pens.DimGray, 0, bmpX.Height / 2, bmpX.Width, bmpX.Height / 2);
+            gX.FillEllipse(Brushes.Aquamarine, bmpX.Width / 2, bmpX.Height / 4, bmpX.Height / 2, bmpX.Height / 2);
+
+            gY.DrawLine(Pens.DimGray, bmpY.Width / 2, 0, bmpY.Width / 2, bmpY.Height);
+            gY.FillEllipse(Brushes.Aquamarine, bmpY.Width / 4, bmpY.Height / 2, bmpX.Height / 2, bmpX.Height / 2);
+
+            scene = new Scene();
+            Figure fig = new Figure();
+            fig.Add(new PointF(100, 120));
+            fig.Add(new PointF(1400, 120));
+            scene.Figures.Add(fig);
+
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            canvas = new Canvas(PCT_CANVAS);
+        }
+
+        //PCT_CANVAS Methods
+        private void PCT_CANVAS_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                f.UpdateAttributes();
+        }
+
+        private void PCT_CANVAS_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (f != null)
+            {
+                canvas.DrawPixel(e.X, e.Y, Color.White);
+                f.Add(new PointF(e.X, e.Y));
+            }
+        }
+
+        private void PCT_CANVAS_MouseDown(object sender, MouseEventArgs e) //This method activates when a mouse button is pressed on the canvas
+        {
+            mouse = e.Location;
+            isMouseDown = true;
+        }
+
+        private void PCT_CANVAS_MouseUp(object sender, MouseEventArgs e) //This method activates when a mouse button is released of the canvas
+        {
+            isMouseDown = false;
+            PCT_CANVAS.Select();
+        }
+
+        private void PCT_CANVAS_MouseMove(object sender, MouseEventArgs e) //It works when we drag and drop the figure in a certain postion
+        {
+            if (isMouseDown)
+            {
+                mouse.X -= e.X;
+                mouse.Y -= e.Y;
+                f.TranslatePoints(new Point(-mouse.X, -mouse.Y));
+                f.UpdateAttributes();
+                mouse = e.Location;
+            }
+        }
+
+
+        //Transformation Methods 
+        //Resize Transformation
         private void sliderY_MouseUp(object sender, MouseEventArgs e)
         {
             IsMouseDownY = false;
@@ -56,6 +141,7 @@ namespace mashUp
             IsMouseDownY = true;
         }
 
+        //Rotation Transformation
         private void sliderX_MouseDown(object sender, MouseEventArgs e)
         {
             ptX = e.Location;
@@ -86,11 +172,8 @@ namespace mashUp
             sliderX.Invalidate();
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            canvas = new Canvas(PCT_CANVAS);
-        }
 
+        //Updates
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (f != null && (IsMouseDownX || IsMouseDownY))
@@ -102,15 +185,29 @@ namespace mashUp
             }
             deltaX = 0;
             deltaY = 1;
-            canvas.Render(scene);
+            canvas.Render(scene); //This option is in charge of indicating the main points of a created figure
+
+            if (play)
+            {
+                if(trackBar1.Value < trackBar1.Maximum)
+                {
+                    trackBar1.Value++;
+                    RunAnimation();
+                }
+            }
         }
 
-        private void PCT_CANVAS_MouseClick(object sender, MouseEventArgs e)
+        private void RunAnimation()
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                f.UpdateAttributes();
+            if (checkBox1.Checked) foreach (Figure figure in scene.Figures) FigureAnimation(figure);
+            else FigureAnimation(f);
         }
 
+        private void FigureAnimation(Figure fig)
+        {
+
+        }
+        //Add figure Method
         private void ADD_Click(object sender, EventArgs e)
         {
             f = new Figure();
@@ -119,6 +216,25 @@ namespace mashUp
             node.Tag = f;
             treeView1.Nodes.Add(node);
         }
+
+        private void PLAY_Click(object sender, EventArgs e)
+        {
+            play = !play;
+
+            if (play)
+                PLAY.Text = "PAUSA";
+            else
+                PLAY.Text = "PLAY";
+        }
+
+        private void RECORD_Click(object sender, EventArgs e)
+        {
+            f.frames[trackBar1.Value] = true;
+            f.positions[trackBar1.Value] = f.Centroid;
+            f.rotations[trackBar1.Value] = f.Arotation;
+            f.sizes[trackBar1.Value] = f.Ascale;
+        }
+
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -157,77 +273,14 @@ namespace mashUp
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void PCT_CANVAS_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouse = e.Location;
-            isMouseDown = true;
-        }
-
-        private void PCT_CANVAS_MouseUp(object sender, MouseEventArgs e)
-        {
-            isMouseDown = false;
-            PCT_CANVAS.Select();
-        }
-
-        private void PCT_CANVAS_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown)
-            {
-                mouse.X -= e.X;
-                mouse.Y -= e.Y;
-                f.TranslatePoints(new Point(-mouse.X, -mouse.Y));
-                mouse = e.Location;
-            }
-        }
-
-        private void PCT_CANVAS_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (f != null)
-            {
-                canvas.DrawPixel(e.X, e.Y, Color.White);
-                f.Add(new PointF(e.X, e.Y));
-            }
-        }
-
         private void treeView1_KeyPress(object sender, KeyPressEventArgs e)
         {
             return;
         }
 
         const int WM_KEYDOWN = 0x0100;
-        public Form1()
-        {
-            InitializeComponent();
-            Init();
-            IsMouseDownX = false;
-        }
 
-        private void Init()
-        {
-            bmpX = new Bitmap(sliderX.Width, sliderX.Height);
-            bmpY = new Bitmap(sliderY.Width, sliderY.Height);
-
-            gX = Graphics.FromImage(bmpX);
-            gY = Graphics.FromImage(bmpY);
-
-            sliderX.Image = bmpX;
-            sliderY.Image = bmpY;
-
-            gX.DrawLine(Pens.DimGray, 0, bmpX.Height / 2, bmpX.Width, bmpX.Height / 2);
-            gX.FillEllipse(Brushes.Aquamarine, bmpX.Width / 2, bmpX.Height / 4, bmpX.Height / 2, bmpX.Height / 2);
-
-            gY.DrawLine(Pens.DimGray, bmpY.Width / 2, 0, bmpY.Width / 2, bmpY.Height);
-            gY.FillEllipse(Brushes.Aquamarine, bmpY.Width / 4, bmpY.Height / 2, bmpX.Height / 2, bmpX.Height / 2);
-
-            scene = new Scene();
-            Figure fig = new Figure();
-            fig.Add(new PointF(100, 120));
-            fig.Add(new PointF(1400, 120));
-            scene.Figures.Add(fig);
-
-        }
-
-
+        //Animation scroll
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             //LBL_STATUS.Text = " ::: " + (float)trackBar1.Value / 100;

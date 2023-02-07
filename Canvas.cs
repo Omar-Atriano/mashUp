@@ -90,7 +90,7 @@ namespace mashUp
             pct.Invalidate();
         }
 
-        public void Render(Scene scene)
+        public void Render(Scene scene) //Render is in charg of drawing the created figure
         {
             FastClear();
             for (int f = 0; f < scene.Figures.Count; f++)

@@ -12,6 +12,14 @@ namespace mashUp
         public List<PointF> Pts;
         public PointF Centroid, Last;
 
+        public bool[] frames;
+        public float[] rotations;
+        public float[] sizes;
+        public PointF[] positions;
+
+        public float Arotation = 0;
+        public float Ascale = 1;
+
         public Figure()
         {
             Pts = new List<PointF>();
