@@ -56,10 +56,10 @@ namespace mashUp
             gY.FillEllipse(Brushes.Aquamarine, bmpY.Width / 4, bmpY.Height / 2, bmpX.Height / 2, bmpX.Height / 2);
 
             scene = new Scene();
-            Figure fig = new Figure(trackBar1.Maximum);
-            fig.Add(new PointF(100, 120));
-            fig.Add(new PointF(1400, 120));
-            scene.Figures.Add(fig);
+            //Figure fig = new Figure(trackBar1.Maximum);
+            //fig.Add(new PointF(100, 120));
+            //fig.Add(new PointF(1400, 120));
+            //scene.Figures.Add(fig);
 
         }
 
@@ -79,7 +79,7 @@ namespace mashUp
         {
             if (f != null)
             {
-                canvas.DrawPixel(e.X, e.Y, Color.White);
+                //canvas.DrawPixel(e.X, e.Y, Color.White);
                 f.Add(new PointF(e.X, e.Y));
             }
         }
@@ -182,6 +182,7 @@ namespace mashUp
                 f.Scale(deltaY);
                 f.Rotate(deltaX);
                 f.TranslatePoints(f.Centroid);
+                f.Ascale *= deltaY;
             }
             deltaX = 0;
             deltaY = 1;
@@ -194,6 +195,11 @@ namespace mashUp
                     trackBar1.Value++;
                     RunAnimation();
                 }
+                else if(trackBar1.Value > trackBar1.Maximum)
+                {
+                    trackBar1.Value--;
+                    RunAnimation();
+                }
             }
         }
 
@@ -203,14 +209,14 @@ namespace mashUp
             else FigureAnimation(f);
         }
 
-        private void FigureAnimation(Figure fig)
+        private void FigureAnimation(Figure figs)
         {
 
         }
         //Add figure Method
         private void ADD_Click(object sender, EventArgs e)
         {
-            f = new Figure();
+            f = new Figure(trackBar1.Maximum);
             scene.Figures.Add(f);
             TreeNode node = new TreeNode("Fig" + (treeView1.Nodes.Count + 1));
             node.Tag = f;
