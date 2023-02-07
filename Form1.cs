@@ -56,7 +56,7 @@ namespace mashUp
             gY.FillEllipse(Brushes.Aquamarine, bmpY.Width / 4, bmpY.Height / 2, bmpX.Height / 2, bmpX.Height / 2);
 
             scene = new Scene();
-            Figure fig = new Figure();
+            Figure fig = new Figure(trackBar1.Maximum);
             fig.Add(new PointF(100, 120));
             fig.Add(new PointF(1400, 120));
             scene.Figures.Add(fig);

@@ -20,9 +20,20 @@ namespace mashUp
         public float Arotation = 0;
         public float Ascale = 1;
 
-        public Figure()
+        public Figure(int frameSize)
         {
             Pts = new List<PointF>();
+
+            frames = new bool[frameSize + 1];
+            rotations = new float[frameSize + 1];
+            sizes = new float[frameSize + 1];
+            positions = new PointF[frameSize + 1];
+
+            for (int i = 0; i < frameSize; i++)
+            {
+                frames[i] = false;
+            }
+
         }
 
         public void Add(PointF point)
