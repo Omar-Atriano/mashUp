@@ -32,6 +32,7 @@
             this.PCT_CANVAS = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.PANEL_LEFT = new System.Windows.Forms.Panel();
+            this.BTN_SPEED = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.PLAY = new System.Windows.Forms.Button();
             this.RECORD = new System.Windows.Forms.Button();
@@ -42,9 +43,10 @@
             this.panelDown = new System.Windows.Forms.Panel();
             this.sliderX = new System.Windows.Forms.PictureBox();
             this.panelR = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.sliderY = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.BTN_SPEED = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.PANEL_LEFT.SuspendLayout();
@@ -57,12 +59,12 @@
             // 
             // PCT_CANVAS
             // 
+            this.PCT_CANVAS.BackColor = System.Drawing.Color.DimGray;
             this.PCT_CANVAS.Location = new System.Drawing.Point(211, 124);
             this.PCT_CANVAS.Name = "PCT_CANVAS";
             this.PCT_CANVAS.Size = new System.Drawing.Size(1533, 652);
             this.PCT_CANVAS.TabIndex = 0;
             this.PCT_CANVAS.TabStop = false;
-            this.PCT_CANVAS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PCT_CANVAS_MouseClick);
             this.PCT_CANVAS.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PCT_CANVAS_MouseDoubleClick);
             this.PCT_CANVAS.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PCT_CANVAS_MouseDown);
             this.PCT_CANVAS.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PCT_CANVAS_MouseMove);
@@ -91,19 +93,32 @@
             this.PANEL_LEFT.Size = new System.Drawing.Size(200, 771);
             this.PANEL_LEFT.TabIndex = 9;
             // 
+            // BTN_SPEED
+            // 
+            this.BTN_SPEED.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_SPEED.Location = new System.Drawing.Point(15, 642);
+            this.BTN_SPEED.Name = "BTN_SPEED";
+            this.BTN_SPEED.Size = new System.Drawing.Size(164, 44);
+            this.BTN_SPEED.TabIndex = 5;
+            this.BTN_SPEED.Text = "Change Animation Speed";
+            this.BTN_SPEED.UseVisualStyleBackColor = true;
+            this.BTN_SPEED.Click += new System.EventHandler(this.BTN_SPEED_Click);
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(25, 499);
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(15, 716);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(138, 20);
+            this.checkBox1.Size = new System.Drawing.Size(165, 21);
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "Animate all figures";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // PLAY
             // 
-            this.PLAY.Location = new System.Drawing.Point(12, 659);
+            this.PLAY.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PLAY.Location = new System.Drawing.Point(15, 594);
             this.PLAY.Name = "PLAY";
             this.PLAY.Size = new System.Drawing.Size(164, 32);
             this.PLAY.TabIndex = 3;
@@ -113,7 +128,8 @@
             // 
             // RECORD
             // 
-            this.RECORD.Location = new System.Drawing.Point(12, 604);
+            this.RECORD.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RECORD.Location = new System.Drawing.Point(15, 539);
             this.RECORD.Name = "RECORD";
             this.RECORD.Size = new System.Drawing.Size(164, 35);
             this.RECORD.TabIndex = 2;
@@ -123,7 +139,8 @@
             // 
             // ADD
             // 
-            this.ADD.Location = new System.Drawing.Point(12, 554);
+            this.ADD.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ADD.Location = new System.Drawing.Point(15, 489);
             this.ADD.Name = "ADD";
             this.ADD.Size = new System.Drawing.Size(164, 33);
             this.ADD.TabIndex = 1;
@@ -133,7 +150,7 @@
             // 
             // treeView1
             // 
-            this.treeView1.BackColor = System.Drawing.Color.Gray;
+            this.treeView1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(192, 474);
@@ -143,7 +160,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.framesLabel);
             this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Location = new System.Drawing.Point(211, 64);
             this.panel1.Name = "panel1";
@@ -153,20 +169,21 @@
             // framesLabel
             // 
             this.framesLabel.AutoSize = true;
-            this.framesLabel.Location = new System.Drawing.Point(630, 41);
+            this.framesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.framesLabel.Location = new System.Drawing.Point(844, 9);
             this.framesLabel.Name = "framesLabel";
-            this.framesLabel.Size = new System.Drawing.Size(56, 16);
+            this.framesLabel.Size = new System.Drawing.Size(222, 58);
             this.framesLabel.TabIndex = 9;
-            this.framesLabel.Text = "Frames:";
+            this.framesLabel.Text = "Frame: \nAvailable Frames:";
             // 
             // panelDown
             // 
             this.panelDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelDown.Controls.Add(this.sliderX);
-            this.panelDown.Location = new System.Drawing.Point(211, 783);
+            this.panelDown.Location = new System.Drawing.Point(211, 811);
             this.panelDown.Name = "panelDown";
-            this.panelDown.Size = new System.Drawing.Size(1505, 52);
+            this.panelDown.Size = new System.Drawing.Size(1483, 52);
             this.panelDown.TabIndex = 11;
             // 
             // sliderX
@@ -182,12 +199,23 @@
             // 
             // panelR
             // 
+            this.panelR.Controls.Add(this.label2);
             this.panelR.Controls.Add(this.sliderY);
             this.panelR.Location = new System.Drawing.Point(1752, 64);
             this.panelR.Margin = new System.Windows.Forms.Padding(4);
             this.panelR.Name = "panelR";
             this.panelR.Size = new System.Drawing.Size(200, 771);
             this.panelR.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(22, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 18);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Figure Size:";
             // 
             // sliderY
             // 
@@ -206,22 +234,24 @@
             this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // BTN_SPEED
+            // label1
             // 
-            this.BTN_SPEED.Location = new System.Drawing.Point(12, 719);
-            this.BTN_SPEED.Name = "BTN_SPEED";
-            this.BTN_SPEED.Size = new System.Drawing.Size(164, 44);
-            this.BTN_SPEED.TabIndex = 5;
-            this.BTN_SPEED.Text = "Change Animation Speed";
-            this.BTN_SPEED.UseVisualStyleBackColor = true;
-            this.BTN_SPEED.Click += new System.EventHandler(this.BTN_SPEED_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(921, 783);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 18);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Figure Rotation:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1924, 871);
+            this.BackColor = System.Drawing.Color.SteelBlue;
+            this.ClientSize = new System.Drawing.Size(1902, 871);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.framesLabel);
             this.Controls.Add(this.panelR);
             this.Controls.Add(this.panelDown);
             this.Controls.Add(this.panel1);
@@ -230,6 +260,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "Form1";
             this.Text = "MashUp";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.PANEL_LEFT.ResumeLayout(false);
@@ -239,8 +270,10 @@
             this.panelDown.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sliderX)).EndInit();
             this.panelR.ResumeLayout(false);
+            this.panelR.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderY)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -262,6 +295,8 @@
         private System.Windows.Forms.Label framesLabel;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button BTN_SPEED;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

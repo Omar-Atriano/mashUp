@@ -16,22 +16,16 @@ namespace mashUp
         Point ptX, ptY, mouse;
         Bitmap bmpX, bmpY;
         Graphics gX, gY;
-        bool IsMouseDownX = false;
-        bool IsMouseDownY = false;
         Canvas canvas;
         float deltaX = 0;
         float deltaY = 1;
         Scene scene;
+        bool IsMouseDownX = false;
+        bool IsMouseDownY = false;
         bool isMouseDown = false;
         bool sliderLimit = false;
-        int speedCounter;
-
-
         private bool play = false;
-
-
-
-        const int WM_KEYUP = 0x0101;
+        int speedCounter;
 
         public Form1()
         {
@@ -51,38 +45,23 @@ namespace mashUp
             sliderX.Image = bmpX;
             sliderY.Image = bmpY;
 
-            gX.DrawLine(Pens.DimGray, 0, bmpX.Height / 2, bmpX.Width, bmpX.Height / 2);
-            gX.FillEllipse(Brushes.Aquamarine, bmpX.Width / 2, bmpX.Height / 4, bmpX.Height / 2, bmpX.Height / 2);
+            gX.DrawLine(Pens.Gold, 0, bmpX.Height / 2, bmpX.Width, bmpX.Height / 2);
+            gX.FillEllipse(Brushes.Purple, bmpX.Width / 2, bmpX.Height / 4, bmpX.Height / 2, bmpX.Height / 2);
 
-            gY.DrawLine(Pens.DimGray, bmpY.Width / 2, 0, bmpY.Width / 2, bmpY.Height);
-            gY.FillEllipse(Brushes.Aquamarine, bmpY.Width / 4, bmpY.Height / 2, bmpX.Height / 2, bmpX.Height / 2);
+            gY.DrawLine(Pens.Gold, bmpY.Width / 2, 0, bmpY.Width / 2, bmpY.Height);
+            gY.FillEllipse(Brushes.Purple, bmpY.Width / 4, bmpY.Height / 2, bmpX.Height / 2, bmpX.Height / 2);
 
             scene = new Scene();
             canvas = new Canvas(PCT_CANVAS);
-            //Figure fig = new Figure(trackBar1.Maximum);
-            //fig.Add(new PointF(100, 120));
-            //fig.Add(new PointF(1400, 120));
-            //scene.Figures.Add(fig);
+            framesLabel.Text = "Frame: " + trackBar1.Value + "\nAvailable Frames: " + trackBar1.Maximum;
 
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            canvas = new Canvas(PCT_CANVAS);
         }
 
         //PCT_CANVAS Methods
-        private void PCT_CANVAS_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                f.UpdateAttributes();
-        }
-
         private void PCT_CANVAS_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (f != null)
             {
-                //canvas.DrawPixel(e.X, e.Y, Color.White);
                 f.Add(new PointF(e.X, e.Y));
             }
         }
@@ -133,7 +112,7 @@ namespace mashUp
                 gY.FillEllipse(Brushes.Aquamarine, bmpY.Width / 4, e.Y, bmpX.Height / 2, bmpX.Height / 2);
 
                 sliderY.Invalidate();
-                deltaY += (float)(ptY.Y - e.Location.Y) / 500;//------------------
+                deltaY += (float)(ptY.Y - e.Location.Y) / 500;
                 ptY.Y = e.Location.Y;
             }
         }
@@ -179,7 +158,7 @@ namespace mashUp
         //Updates
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (f != null) //&& (IsMouseDownX || IsMouseDownY)
+            if (f != null)
             {
                 f.TranslateToOrigin();
                 f.Scale(deltaY);
@@ -208,7 +187,7 @@ namespace mashUp
             }
         }
 
-        private void refresh(Figure figs, float x, float y) //Funciona igual que el tick, pero solo para guardar valores, así no tenemos que esperar a la computadora para guardar valores
+        private void refresh(Figure figs, float x, float y) //Method that helps to save and update more data as size, rotation.
         {
 
             if (figs != null)
@@ -216,16 +195,18 @@ namespace mashUp
                 figs.TranslateToOrigin();
                 figs.Scale(1 / figs.Ascale); //Cada que avancemos o retrocedamos un frame de la animación, elimina la escala que tenga volviendola 1
                 figs.Ascale *= 1 / figs.Ascale;
-                figs.Scale(y); //Para despues modificar la escala por el valor que mandamos a pedir
-                figs.Rotate(-figs.Arotation + x); //Cada que avancemos o retrocedamos un frame de la animación, elimina la rotación que tenga dejandolo en el angulo 0, y despues le añade la rotación que mandamos
-                figs.Arotation = x; //una vez modificado guardamos la nueva rotacion
-                figs.Ascale = y; //una vez modificado guardamos la nueva escala
+                figs.Scale(y);
+                figs.Rotate(-figs.Arotation + x); //Each frame it will reset the figure rotation and update it with the most recent. 
+                figs.Arotation = x; 
+                figs.Ascale = y; 
                 figs.TranslatePoints(figs.Centroid);
             }
         }
 
         private void RunAnimation()
         {
+            framesLabel.Text = "Frame: " + trackBar1.Value + "\nAvailable Frames: " + trackBar1.Maximum;
+
             if (checkBox1.Checked) foreach (Figure figure in scene.Figures) FigureAnimation(figure);
             else FigureAnimation(f);
         }
@@ -264,14 +245,14 @@ namespace mashUp
 
                 difference = ((float)trackBar1.Value - firstSavedFrame) / (finalSavedFrame - firstSavedFrame); 
 
-                rotAngle = ((figs.rotations[finalSavedFrame] - figs.rotations[firstSavedFrame]) * difference) + figs.rotations[firstSavedFrame]; //la rotacion guardada en el frame siguiente (guardado), menos la rotacion del frame anterior (guardado) podemos obtener cuantos grados hay entre ellos. Luego obtejemos el valor del punto en el que estamos con el porcentaje. Finalmente le sumamos los grados del inicio para poder obtener la rotacion inicial
+                rotAngle = ((figs.rotations[finalSavedFrame] - figs.rotations[firstSavedFrame]) * difference) + figs.rotations[firstSavedFrame]; //This helps to play a possible stated rotation by taking into account the rotation of a point in comparison to another.
                 scaleFactor = ((figs.sizes[finalSavedFrame] - figs.sizes[firstSavedFrame]) * difference) + figs.sizes[firstSavedFrame];
 
                 figs.Follow(figs.positions[firstSavedFrame], figs.positions[finalSavedFrame], difference); //This helps to go to the next point.
                 refresh(figs, rotAngle, scaleFactor); //Values are updated even before the tick
             }
         }
-        //Add figure Method
+        //Add figure Button Method
         private void ADD_Click(object sender, EventArgs e)
         {
             f = new Figure(trackBar1.Maximum);
@@ -281,6 +262,7 @@ namespace mashUp
             treeView1.Nodes.Add(node);
         }
 
+        //Play Animation Button Method
         private void PLAY_Click(object sender, EventArgs e)
         {
             play = !play;
@@ -291,6 +273,7 @@ namespace mashUp
                 PLAY.Text = "PLAY";
         }
 
+        //Record frame Button Method
         private void RECORD_Click(object sender, EventArgs e)
         {
             f.frames[trackBar1.Value] = true;
@@ -299,18 +282,7 @@ namespace mashUp
             f.sizes[trackBar1.Value] = f.Ascale;
         }
 
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            f = (Figure)treeView1.SelectedNode.Tag;
-            ADD.Select();
-        }
-
-        public static bool IsControlDown()
-        {
-            return (Control.ModifierKeys & Keys.Control) == Keys.Control;
-        }
-
+        //Increase speed Button Method
         private void BTN_SPEED_Click(object sender, EventArgs e)
         {
             if(speedCounter == 0)
@@ -345,38 +317,17 @@ namespace mashUp
             }
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (f == null)
-                return false;
-
-            switch (keyData)
-            {
-                case Keys.Left:
-                    f.Centroid.X -= 3;
-                    break;
-                case Keys.Right:
-                    f.Centroid.X += 3;
-                    break;
-                case Keys.Up:
-                    f.Centroid.Y += -3;
-                    break;
-                case Keys.Down:
-                    f.Centroid.Y += 3;
-                    break;
-                case Keys.Space:
-                    break;
-            }
-            PCT_CANVAS.Select();
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
+        //Figures list methods
         private void treeView1_KeyPress(object sender, KeyPressEventArgs e)
         {
             return;
         }
 
-        const int WM_KEYDOWN = 0x0100;
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            f = (Figure)treeView1.SelectedNode.Tag;
+            ADD.Select();
+        }
 
         //Animation scroll
         private void trackBar1_Scroll(object sender, EventArgs e)
