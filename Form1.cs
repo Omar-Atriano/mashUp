@@ -24,6 +24,7 @@ namespace mashUp
         Scene scene;
         bool isMouseDown = false;
         bool sliderLimit = false;
+        int speedCounter;
 
 
         private bool play = false;
@@ -307,6 +308,40 @@ namespace mashUp
         public static bool IsControlDown()
         {
             return (Control.ModifierKeys & Keys.Control) == Keys.Control;
+        }
+
+        private void BTN_SPEED_Click(object sender, EventArgs e)
+        {
+            if(speedCounter == 0)
+            {
+                BTN_SPEED.Text = "|>";
+                timer1.Interval = 20;
+                speedCounter++;
+            }
+            else if(speedCounter == 1)
+            {
+                BTN_SPEED.Text = "|>|>";
+                timer1.Interval = 10;
+                speedCounter++;
+            }
+            else if (speedCounter == 2)
+            {
+                BTN_SPEED.Text = "|>|>|>";
+                timer1.Interval = 5;
+                speedCounter++;
+            }
+            else if (speedCounter == 3)
+            {
+                BTN_SPEED.Text = "|>|>|>|>";
+                timer1.Interval = 1;
+                speedCounter++;
+            }
+            else if (speedCounter == 4)
+            {
+                BTN_SPEED.Text = "Change Animation Speed";
+                timer1.Interval = 40;
+                speedCounter = 0;
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

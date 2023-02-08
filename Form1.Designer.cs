@@ -44,6 +44,7 @@
             this.panelR = new System.Windows.Forms.Panel();
             this.sliderY = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.BTN_SPEED = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.PANEL_LEFT.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             // PANEL_LEFT
             // 
+            this.PANEL_LEFT.Controls.Add(this.BTN_SPEED);
             this.PANEL_LEFT.Controls.Add(this.checkBox1);
             this.PANEL_LEFT.Controls.Add(this.PLAY);
             this.PANEL_LEFT.Controls.Add(this.RECORD);
@@ -101,7 +103,7 @@
             // 
             // PLAY
             // 
-            this.PLAY.Location = new System.Drawing.Point(12, 680);
+            this.PLAY.Location = new System.Drawing.Point(12, 659);
             this.PLAY.Name = "PLAY";
             this.PLAY.Size = new System.Drawing.Size(164, 32);
             this.PLAY.TabIndex = 3;
@@ -204,6 +206,16 @@
             this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // BTN_SPEED
+            // 
+            this.BTN_SPEED.Location = new System.Drawing.Point(12, 719);
+            this.BTN_SPEED.Name = "BTN_SPEED";
+            this.BTN_SPEED.Size = new System.Drawing.Size(164, 44);
+            this.BTN_SPEED.TabIndex = 5;
+            this.BTN_SPEED.Text = "Change Animation Speed";
+            this.BTN_SPEED.UseVisualStyleBackColor = true;
+            this.BTN_SPEED.Click += new System.EventHandler(this.BTN_SPEED_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -249,6 +261,7 @@
         private System.Windows.Forms.Button RECORD;
         private System.Windows.Forms.Label framesLabel;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button BTN_SPEED;
     }
 }
 
