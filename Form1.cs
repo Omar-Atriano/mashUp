@@ -161,7 +161,7 @@ namespace mashUp
 
                 sliderX.Invalidate();
                 deltaX += (float)(e.Location.X - ptX.X) / 3;
-                f.Arotation += deltaX;
+                
                 ptX.X = e.Location.X;
             }
         }
@@ -186,6 +186,7 @@ namespace mashUp
                 f.Scale(deltaY);
                 f.Rotate(deltaX);
                 f.TranslatePoints(f.Centroid);
+                f.Arotation += deltaX;
                 f.Ascale *= deltaY;
             }
             deltaX = 0;
