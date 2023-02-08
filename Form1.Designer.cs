@@ -101,7 +101,7 @@
             // 
             // PLAY
             // 
-            this.PLAY.Location = new System.Drawing.Point(12, 656);
+            this.PLAY.Location = new System.Drawing.Point(12, 680);
             this.PLAY.Name = "PLAY";
             this.PLAY.Size = new System.Drawing.Size(164, 32);
             this.PLAY.TabIndex = 3;
@@ -218,7 +218,6 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "Form1";
             this.Text = "MashUp";
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.PANEL_LEFT.ResumeLayout(false);

@@ -23,6 +23,7 @@ namespace mashUp
         float deltaY = 1;
         Scene scene;
         bool isMouseDown = false;
+        bool sliderLimit = false;
 
 
         private bool play = false;
@@ -56,6 +57,7 @@ namespace mashUp
             gY.FillEllipse(Brushes.Aquamarine, bmpY.Width / 4, bmpY.Height / 2, bmpX.Height / 2, bmpX.Height / 2);
 
             scene = new Scene();
+            canvas = new Canvas(PCT_CANVAS);
             //Figure fig = new Figure(trackBar1.Maximum);
             //fig.Add(new PointF(100, 120));
             //fig.Add(new PointF(1400, 120));
@@ -190,16 +192,17 @@ namespace mashUp
 
             if (play)
             {
-                if(trackBar1.Value < trackBar1.Maximum)
+                if (trackBar1.Value < trackBar1.Maximum && !sliderLimit)
                 {
                     trackBar1.Value++;
                     RunAnimation();
                 }
-                else if(trackBar1.Value > trackBar1.Maximum)
+                else if (trackBar1.Value > 0 && sliderLimit)
                 {
                     trackBar1.Value--;
                     RunAnimation();
                 }
+                else sliderLimit = !sliderLimit;
             }
         }
 
@@ -234,10 +237,10 @@ namespace mashUp
             float rotAngle; //Rotation preset on that frame
             float scaleFactor; //How much the size of the figure will increase on that frame
 
-            if (scene.Figures.Count == 0) return; //It detects if we have created figures before starting an animation
+            if (scene.Figures.Count == 0 || figs.frames[trackBar1.Value]) return; //It detects if we have created figures before starting an animation
             else
             {
-                for(int i = trackBar1.Value; i >= 0; i--)
+                for (int i = trackBar1.Value; i >= 0; i--)
                 {
                     if (figs.frames[i])
                     {
@@ -245,7 +248,7 @@ namespace mashUp
                         break;
                     }
                 }
-                for (int i = trackBar1.Value; i <= figs.positions.Length - 1; i++) 
+                for (int i = trackBar1.Value; i <= figs.positions.Length - 1; i++)
                 {
                     if (figs.frames[i])
                     {
