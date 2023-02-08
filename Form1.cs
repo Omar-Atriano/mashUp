@@ -285,6 +285,7 @@ namespace mashUp
         //Increase speed Button Method
         private void BTN_SPEED_Click(object sender, EventArgs e)
         {
+            //This condition is useful so the speed button cannot be used if there is not any animation playing.
             if (play == false) MessageBox.Show("You cannot change the speed of the animation if the animation is not playing. \n\nPlease try again.", "Change Animation Speed Error");
             else
             {
