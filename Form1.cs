@@ -161,7 +161,6 @@ namespace mashUp
 
                 sliderX.Invalidate();
                 deltaX += (float)(e.Location.X - ptX.X) / 3;
-                
                 ptX.X = e.Location.X;
             }
         }
