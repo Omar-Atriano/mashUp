@@ -11,7 +11,7 @@ namespace mashUp
     {
         public List<PointF> Pts;
         public PointF Centroid, Last;
-        int w;
+        
 
         public bool[] frames;
         public float[] rotations;
