@@ -285,36 +285,41 @@ namespace mashUp
         //Increase speed Button Method
         private void BTN_SPEED_Click(object sender, EventArgs e)
         {
-            if(speedCounter == 0)
+            if (play == false) MessageBox.Show("You cannot change the speed of the animation if the animation is not playing. \n\nPlease try again.", "Change Animation Speed Error");
+            else
             {
-                BTN_SPEED.Text = "|>";
-                timer1.Interval = 20;
-                speedCounter++;
+                if (speedCounter == 0)
+                {
+                    BTN_SPEED.Text = "|>";
+                    timer1.Interval = 20;
+                    speedCounter++;
+                }
+                else if (speedCounter == 1)
+                {
+                    BTN_SPEED.Text = "|>|>";
+                    timer1.Interval = 10;
+                    speedCounter++;
+                }
+                else if (speedCounter == 2)
+                {
+                    BTN_SPEED.Text = "|>|>|>";
+                    timer1.Interval = 5;
+                    speedCounter++;
+                }
+                else if (speedCounter == 3)
+                {
+                    BTN_SPEED.Text = "|>|>|>|>";
+                    timer1.Interval = 1;
+                    speedCounter++;
+                }
+                else if (speedCounter == 4)
+                {
+                    BTN_SPEED.Text = "Change Animation Speed";
+                    timer1.Interval = 40;
+                    speedCounter = 0;
+                }
             }
-            else if(speedCounter == 1)
-            {
-                BTN_SPEED.Text = "|>|>";
-                timer1.Interval = 10;
-                speedCounter++;
-            }
-            else if (speedCounter == 2)
-            {
-                BTN_SPEED.Text = "|>|>|>";
-                timer1.Interval = 5;
-                speedCounter++;
-            }
-            else if (speedCounter == 3)
-            {
-                BTN_SPEED.Text = "|>|>|>|>";
-                timer1.Interval = 1;
-                speedCounter++;
-            }
-            else if (speedCounter == 4)
-            {
-                BTN_SPEED.Text = "Change Animation Speed";
-                timer1.Interval = 40;
-                speedCounter = 0;
-            }
+            
         }
 
         //Figures list methods
