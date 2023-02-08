@@ -160,7 +160,7 @@ namespace mashUp
                 gX.FillEllipse(Brushes.Aquamarine, e.X, sliderX.Height / 4, sliderX.Height / 2, sliderX.Height / 2);
 
                 sliderX.Invalidate();
-                deltaX += (float)(e.Location.X - ptX.X) / 1;
+                deltaX += (float)(e.Location.X - ptX.X) / 3;
                 f.Arotation += deltaX;
                 ptX.X = e.Location.X;
             }
