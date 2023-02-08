@@ -176,7 +176,7 @@ namespace mashUp
         //Updates
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (f != null && (IsMouseDownX || IsMouseDownY))
+            if (f != null) //&& (IsMouseDownX || IsMouseDownY)
             {
                 f.TranslateToOrigin();
                 f.Scale(deltaY);
@@ -342,8 +342,7 @@ namespace mashUp
         //Animation scroll
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            //LBL_STATUS.Text = " ::: " + (float)trackBar1.Value / 100;
-            f.Follow(scene.Figures[0].Pts[0], scene.Figures[0].Pts[1], (float)trackBar1.Value / 100);
+            RunAnimation();
         }
     }
 }
